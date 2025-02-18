@@ -1,0 +1,50 @@
+<div class="create-product-container">
+  @if(rol === 'ADMIN'){
+  <button mat-raised-button color="accent "(click)="createEditProduct()">
+    <mat-icon>add</mat-icon>Crear Producto</button>
+  }
+</div>
+@if(products.length === 0){
+  <p class="create-product" style="text-align: center;  font-weight: bold;">No hay productos disponibles</p>
+  }
+<div class="product-container">
+
+  @for (product of products; track $index) {
+    
+  <mat-card class="product-card">
+    @if(rol === 'ADMIN'){
+        <button mat-mini-fab color="warn" class="edit-button" (click)="createEditProduct(product)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+    }
+    <img [src]="product.imageBase64  " alt="{{ product.name }}" />
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-content style="font-size: 0.875em; text-align: left">
+      <p>{{ product.description }}</p>
+      <p><strong>Precio:</strong> ${{ product.price }}</p>
+      <p><strong>Stock:</strong> {{ product.quantity }}</p>
+    </mat-card-content>
+    <mat-card-actions class="product-actions">
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>shopping_cart</mat-icon> Comprar
+      </button>
+      @if(rol === 'ADMIN'){
+      <button mat-flat-button color="warn" class="action-button" (click)="deleteProduct(product.id)" >
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+
+      }
+    </mat-card-actions>
+  </mat-card>
+  }
+</div>
+
+<mat-paginator
+  [length]="total"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 15]"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>
+

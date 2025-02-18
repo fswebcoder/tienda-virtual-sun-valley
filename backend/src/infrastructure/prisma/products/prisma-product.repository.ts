@@ -64,6 +64,9 @@ export class PrismaProductRepository implements IProductRepository {
       this.prisma.product.findMany({
         skip,
         take: limit,
+        orderBy: {
+          name: 'desc' // Order by creation date in descending order
+        },
         select: {
           id: true,
           name: true,
@@ -77,9 +80,8 @@ export class PrismaProductRepository implements IProductRepository {
     ]);
   
     return { 
-      products: products.map(p => new Product(p.id, p.name, p.description, p.price, p.stock, p.imageBase64!)),
+      products: products.map(p => new Product(p.id, p.name, p.description, p.price, p.stock, p.imageBase64 == null ? 'https://icons.veryicon.com/png/o/business/financial-category/no-data-6.png' : p.imageBase64!)),
       total
     };
   }
-  
 }

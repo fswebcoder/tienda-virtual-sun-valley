@@ -1,5 +1,5 @@
 import { RouterOutlet } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,14 +13,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { LoginDto } from '../../models/login.dto';
 
 @Component({
   selector: 'app-auth-dump',
-  imports: [RouterOutlet,ValidatioErrorForms, FormsModule, ReactiveFormsModule,MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatIconModule, MatListModule,MatGridListModule, MatBadgeModule,MatSidenavModule],
+  imports: [ValidatioErrorForms, FormsModule, ReactiveFormsModule,MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatIconModule, MatListModule,MatGridListModule, MatBadgeModule,MatSidenavModule],
   templateUrl: './auth-dump.component.html',
   styleUrl: './auth-dump.component.scss'
 })
 export class AuthDumpComponent {
+
+  debounceTime?: NodeJS.Timeout;
 
   
   private formBuilder: FormBuilder = new FormBuilder();
@@ -30,12 +33,45 @@ export class AuthDumpComponent {
     this.initForm();
   }
 
+  @Output() loginEvent = new EventEmitter();
+
+
   initForm(): void {
     this.form = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       captcha: [null]
     })
+  }
+
+  validateForm(): void {
+    if(this.form?.valid){
+      this.login();
+   }
+  }
+
+  login(){
+    this.form?.disable();
+    if(this.debounceTime) clearTimeout(this.debounceTime);
+    this.debounceTime =  setTimeout(() => {
+      this.form?.enable();
+   }, 500);
+   this.loginEvent.emit(this.generateParams());
+  }
+  
+
+  generateParams(): LoginDto {
+    let  params =  new LoginDto(this.username?.value, this.password?.value);
+    return params;
+  }
+
+
+  get username() {
+    return this.form.get('username');
+  }
+
+  get password() {
+    return this.form.get('password');
   }
 
 }

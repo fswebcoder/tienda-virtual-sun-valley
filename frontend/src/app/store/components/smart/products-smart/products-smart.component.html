@@ -1,0 +1,8 @@
+<app-products-dump
+  [products]="products"
+  [total]="total"
+  [totalPages]="totalPages"
+  (emitSearch)="getAllProducts($event)"
+  (emitUpdateProduct)="saveProduct($event)"
+  (deleteProductByid)="deleteProduct($event)"
+/>

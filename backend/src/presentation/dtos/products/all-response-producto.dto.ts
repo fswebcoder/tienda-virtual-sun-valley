@@ -14,7 +14,7 @@ export class AllProductResponse {
                 "imageBase64": "https://www.anm.gov.co/sites/default/files/boletin-minerales_1.jpg"
               }]
      })
-     users: Product[];
+     products: Product[];
 
     @ApiProperty({ example: 10 })
     total: number;

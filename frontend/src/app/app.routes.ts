@@ -3,8 +3,32 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        loadComponent() {
-            return import('./auth/pages/auth/auth.component').then(m => m.AuthComponent);
+        async loadComponent() {
+            const m = await import('./auth/pages/auth/auth.component');
+            return m.AuthComponent;
         },
+    },
+    {
+        path: 'store',
+        async loadComponent() {
+            const m = await import('./store/home-store/home-store.component');
+            return m.HomeStoreComponent;
+        },
+        children: [
+            {
+                path: 'products',
+                async loadComponent() {
+                    const m = await import('./store/components/smart/products-smart/products-smart.component');
+                    return m.ProductsSmartComponent;
+                }
+            },
+            // {
+            //     path: 'users',
+            //     async loadComponent() {
+            //         const m = await import('./store/components/smart/users-smart/users-smart.component');
+            //         return m.UsersSmartComponent;
+            //     }
+            // }
+        ]
     }
 ];

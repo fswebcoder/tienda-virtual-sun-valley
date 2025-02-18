@@ -1,0 +1,33 @@
+.modal-body {
+  padding: 2rem;
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 400px) {
+    padding: 0.5rem;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.separador {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}

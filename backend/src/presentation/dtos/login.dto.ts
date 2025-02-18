@@ -10,5 +10,7 @@ export class LoginDto {
   @ApiProperty({ example: 'password123', description: 'Contraseña del usuario' })
   @MinLength(6)
   @IsNotEmpty()
-  password: string;
+  password: string; 
+
+  
 }

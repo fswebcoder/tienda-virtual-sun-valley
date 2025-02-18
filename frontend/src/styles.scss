@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -12,4 +13,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-elevation-z4 {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mat-list-item{
+    display: flex;
+    align-items: center;
+}
+
+.mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
+    cursor: pointer;
+    display: flex;
+}
+
+.mat-mdc-list-item{
+    display: flex;
+    align-items: center;
+}
+
+.mdc-list-item__primary-text {
+    display: flex
+;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--mdc-list-list-item-label-text-color, var(--mat-sys-on-surface));
+    font-family: var(--mdc-list-list-item-label-text-font, var(--mat-sys-body-large-font));
+    line-height: var(--mdc-list-list-item-label-text-line-height, var(--mat-sys-body-large-line-height));
+    font-size: var(--mdc-list-list-item-label-text-size, var(--mat-sys-body-large-size));
+    font-weight: var(--mdc-list-list-item-label-text-weight, var(--mat-sys-body-large-weight));
+    letter-spacing: var(--mdc-list-list-item-label-text-tracking, var(--mat-sys-body-large-tracking));
+}
+
+mat-icon{
+    margin-right: 6px;
+    color: var(--mdc-list-list-item-icon-color, var(--mat-sys-on-surface));
 }
