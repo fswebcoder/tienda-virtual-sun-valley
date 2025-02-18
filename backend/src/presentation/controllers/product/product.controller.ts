@@ -5,6 +5,7 @@ import { DeleteProductUseCase } from 'src/core/domain/usecases/product/delete-pr
 import { FindAllProductsUseCase } from 'src/core/domain/usecases/product/find-all-products.use-case';
 import { UpdateProductUseCase } from 'src/core/domain/usecases/user/update-product.use-case';
 import { JwtAuthGuard } from 'src/infrastructure/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/infrastructure/auth/roles.guard';
 import { CreateProductDto } from 'src/presentation/dtos/products/create-product.dto';
 import { ResponseProductDto } from 'src/presentation/dtos/products/response-product.dto';
 
@@ -19,7 +20,7 @@ export class ProductController {
     private readonly deleteProductUseCase: DeleteProductUseCase
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('create')
   @ApiBody({ type: CreateProductDto }) 
   @ApiResponse({ status: 201, description: 'Producto creado', type : ResponseProductDto })
@@ -35,7 +36,7 @@ export class ProductController {
     return this.findAllProductsUseCase.execute(Number(page), Number(limit));
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Patch(':id')
   @ApiBody({ type: CreateProductDto }) 
   @ApiResponse({ status: 200, description: 'Producto actualizado correctamente', type: ResponseProductDto })
@@ -44,7 +45,7 @@ export class ProductController {
     return this.updateProductUseCase.execute(id, productData);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Producto eliminado correctamente', })
   @ApiResponse({ status: 404, description: 'Producto no encontrado' })
