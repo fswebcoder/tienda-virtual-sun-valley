@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaUserRepository } from './prisma-user.repository';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../prisma.service';
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { User } from '../../core/domain/entities/user.entity';
+import { User } from '../../../core/domain/entities/user.entity';
 import { ERol } from '@prisma/client';
 
 describe('PrismaUserRepository', () => {

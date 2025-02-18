@@ -1,7 +1,7 @@
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { User } from '../../entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from 'src/presentation/dtos/create-user.dto';
+import { CreateUserDto } from 'src/presentation/dtos/users/create-user.dto';
 import { IUserRepository } from '../../interfaces/user.repository';
 
 @Injectable() 
@@ -15,11 +15,11 @@ export class CreateUserUseCase {
         }
       const hashedPassword = await bcrypt.hash(userDto.password, 10);
       const newUser = new User(
-        crypto.randomUUID(), // Generate a new ID for the user
+        crypto.randomUUID(), 
         userDto.name,
         userDto.email,
         hashedPassword,
-        userDto.rol
+        userDto.rol 
       );
       return this.userRepository.createUser(newUser);
     }

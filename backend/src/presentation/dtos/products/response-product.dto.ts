@@ -24,7 +24,7 @@ export class ResponseProductDto {
   @IsNotEmpty({ message: 'La cantidad es obligatoria' })
   quantity: number;
 
-    @ApiProperty({ example: 'https://example.com/image.jpg', description: 'URL de la imagen' })
+    @ApiProperty({ example: 'https://www.anm.gov.co/sites/default/files/boletin-minerales_1.jpg', description: 'URL de la imagen' })
     @IsNotEmpty({ message: 'La imagen es obligatoria' })
     imageBase64: string;
     

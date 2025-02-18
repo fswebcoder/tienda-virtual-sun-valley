@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
-import { IProductRepository } from '../../core/domain/interfaces/product.repository';
-import { Product } from '../../core/domain/entities/product.entity';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma.service';
+import { IProductRepository } from '../../../core/domain/interfaces/product.repository';
+import { Product } from '../../../core/domain/entities/product.entity';
 
 @Injectable()
 export class PrismaProductRepository implements IProductRepository {
@@ -29,15 +29,31 @@ export class PrismaProductRepository implements IProductRepository {
     return new Product(product.id, product.name, product.description, product.price, product.stock, product.imageBase64!);
   }
 
-  async update(id: string, product: Partial<Product>): Promise<Product> {
+  async update(id: string, product: Partial<Omit<Product, 'id'>>): Promise<Product> {
+    const existingProduct = await this.prisma.product.findUnique({ where: { id } });
+    if (!existingProduct) {
+      throw new NotFoundException('Producto no encontrado');
+    }
+
     const updatedProduct = await this.prisma.product.update({
       where: { id },
-      data: product
+      data: product 
     });
+
     return new Product(updatedProduct.id, updatedProduct.name, updatedProduct.description, updatedProduct.price, updatedProduct.stock, updatedProduct.imageBase64!);
   }
 
   async delete(id: string): Promise<void> {
+    const product = await this.prisma.product.findUnique({ where: { id } });
+    if (!product) {
+      throw new NotFoundException('Producto no encontrado');
+    }
+
+    const orderItem = await this.prisma.orderItem.findFirst({ where: { productId: id } });
+    if (orderItem) {
+      throw new ConflictException('No se puede eliminar el producto porque está asociado a una orden.');
+    }
+
     await this.prisma.product.delete({ where: { id } });
   }
 

@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaUserRepository } from '../prisma/prisma-user.repository';
+import { PrismaUserRepository } from '../prisma/users/prisma-user.repository';
 import { PersistencePrismaModule } from '../prisma/prisma.module';
 import { LoginUseCase } from 'src/core/domain/usecases/auth/login.use-case';
 import { AuthController } from 'src/presentation/controllers/users/auth.controller';
@@ -26,7 +26,7 @@ import { AuthController } from 'src/presentation/controllers/users/auth.controll
   providers: [
     LoginUseCase,
     JwtStrategy,
-    { provide: 'IUserRepository', useClass: PrismaUserRepository }, // ✅ Registrar repositorio
+    { provide: 'IUserRepository', useClass: PrismaUserRepository }, 
   ],
 })
 export class AuthModule {}

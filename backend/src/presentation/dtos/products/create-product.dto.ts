@@ -18,9 +18,9 @@ export class CreateProductDto {
       @ApiProperty({ example: 5, description: 'Cantidad de productos' })
       @IsNumber({}, { message: 'La cantidad debe ser un número' })
       @IsNotEmpty({ message: 'La cantidad es obligatoria' })
-      quantity: number;
-    
-        @ApiProperty({ example: 'https://example.com/image.jpg', description: 'URL de la imagen' })
-        @IsNotEmpty({ message: 'La imagen es obligatoria' })
-        imageBase64: string;
+      stock: number;
+  
+      @ApiProperty({ example: 'https://www.anm.gov.co/sites/default/files/boletin-minerales_1.jpg', description: 'URL de la imagen' })
+      @IsNotEmpty({ message: 'La imagen es obligatoria' })
+      imageBase64: string;
 }
