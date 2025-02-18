@@ -6,7 +6,8 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const requiredRole = this.reflector.get<string>('role', context.getHandler());
+    const requiredRole = this.reflector.get<string>('role', context.getHandler()) || 'ADMIN';
+    console.log("requiredRole", requiredRole);
     if (!requiredRole) {
       return true;
     }
@@ -14,7 +15,7 @@ export class RolesGuard implements CanActivate {
     const user = request.user;
 
     if (user.role !== requiredRole) {
-      throw new ForbiddenException('Insufficient permissions');
+      throw new ForbiddenException('No tienes permisos para realizar esta acción');
     }
     return true;
   }

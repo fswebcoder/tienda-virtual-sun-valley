@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 
 import { UserController } from './user.controller';
-import { CreateUserUseCase } from '../../core/domain/usecases/user/create-user.use-case';
+import { CreateUserUseCase } from '../../../core/domain/usecases/user/create-user.use-case';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { PrismaUserRepository } from 'src/infrastructure/prisma/prisma-user.repository';
+import { DeleteUserUseCase } from 'src/core/domain/usecases/user/delete-user.use-case';
+import { FindAllUsersUseCase } from 'src/core/domain/usecases/user/find-users.use-case';
 
 @Module({
   controllers: [UserController],
@@ -12,7 +14,9 @@ import { PrismaUserRepository } from 'src/infrastructure/prisma/prisma-user.repo
     PrismaUserRepository, 
     { provide: 'IUserRepository', useClass: PrismaUserRepository },
     CreateUserUseCase, 
+    DeleteUserUseCase,
+    FindAllUsersUseCase
   ],
-  exports: [CreateUserUseCase], 
+  exports: [CreateUserUseCase, DeleteUserUseCase, FindAllUsersUseCase], 
 })
 export class UserModule {}

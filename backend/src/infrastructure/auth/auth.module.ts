@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PrismaUserRepository } from '../prisma/prisma-user.repository';
 import { PersistencePrismaModule } from '../prisma/prisma.module';
 import { LoginUseCase } from 'src/core/domain/usecases/auth/login.use-case';
-import { AuthController } from 'src/presentation/controllers/auth.controller';
+import { AuthController } from 'src/presentation/controllers/users/auth.controller';
 
 @Module({
   controllers: [AuthController],

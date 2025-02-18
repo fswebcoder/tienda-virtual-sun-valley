@@ -1,7 +1,8 @@
 import { User } from '../entities/user.entity';
 
 export interface IUserRepository {
-  create(user: User): Promise<User>;
+  createUser(user: User): Promise<User>;
   findByEmail(email: string): Promise<User | null>;
-  delete(id: string): Promise<void>;
+  deleteUser(id: string): Promise<void>;
+  findAll(page: number, limit: number): Promise<{ users: Omit<User, 'password'>[], total: number }>;
 }
