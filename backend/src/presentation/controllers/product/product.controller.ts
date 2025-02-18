@@ -6,6 +6,7 @@ import { FindAllProductsUseCase } from 'src/core/domain/usecases/product/find-al
 import { UpdateProductUseCase } from 'src/core/domain/usecases/user/update-product.use-case';
 import { JwtAuthGuard } from 'src/infrastructure/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/infrastructure/auth/roles.guard';
+import { AllProductResponse } from 'src/presentation/dtos/products/all-response-producto.dto';
 import { CreateProductDto } from 'src/presentation/dtos/products/create-product.dto';
 import { ResponseProductDto } from 'src/presentation/dtos/products/response-product.dto';
 
@@ -31,7 +32,8 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @Get('all')
-  @ApiResponse({ status: 200, description: 'Lista de productos', type: [ResponseProductDto] })
+  @ApiBearerAuth()
+  @ApiResponse({ status: 200, description: 'Lista de productos', type: AllProductResponse })
   async findAll(@Query('page') page = 1, @Query('limit') limit = 10) {
     return this.findAllProductsUseCase.execute(Number(page), Number(limit));
   }

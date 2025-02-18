@@ -1,0 +1,110 @@
+# 🛍️ Tienda Virtual - Backend (NestJS + Prisma + PostgreSQL)
+
+Este es el backend de la tienda virtual desarrollado con **NestJS**, utilizando **Prisma** como ORM y **PostgreSQL** como base de datos.
+
+## 🚀 Requisitos Previos
+
+Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
+
+- **Node.js** (Versión 18 o superior) → [Descargar Node.js](https://nodejs.org/)
+- **PostgreSQL** (Versión 14 o superior) → [Descargar PostgreSQL](https://www.postgresql.org/download/)
+- **Git** → [Descargar Git](https://git-scm.com/)
+
+## 📥 Instalación
+
+### 1️⃣ Clonar el Repositorio
+
+```sh
+git clone https://github.com/tu-usuario/tienda-virtual-backend.git
+cd tienda-virtual-backend
+```
+
+### 2️⃣ Instalar Dependencias
+
+```sh
+npm install
+```
+
+## 🛠️ Configuración del Entorno
+
+### 3️⃣ Configurar Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto y copia el siguiente contenido:
+
+```env
+DATABASE_URL="postgresql://usuario:password@localhost:5432/tiendavirtual?schema=public"
+JWT_SECRET="clave_super_secreta_para_jwt"
+```
+
+📌 **Asegúrate de reemplazar `usuario` y `password` con tus credenciales de PostgreSQL.**
+
+### 4️⃣ Crear la Base de Datos con Prisma
+
+La base de datos se creará automáticamente al ejecutar la migración de Prisma en el siguiente paso. No es necesario crearla manualmente.
+
+```sql
+CREATE DATABASE tiendavirtual;
+```
+
+## 🔧 Configuración de Prisma
+
+### 5️⃣ Generar las Migraciones
+
+Ejecuta el siguiente comando para sincronizar la base de datos:
+
+```sh
+npx prisma migrate dev --name init
+```
+
+### 6️⃣ Generar el Cliente de Prisma
+
+```sh
+npx prisma generate
+```
+
+## 🚀 Ejecución del Servidor
+
+### 7️⃣ Iniciar la API en Modo Desarrollo
+
+```sh
+npm run start:dev
+```
+
+📌 La API estará disponible en **`http://localhost:3000`**.
+
+### 8️⃣ Acceder a la Documentación Swagger
+
+Una vez el servidor esté corriendo, accede a **Swagger** para probar los endpoints:
+
+```sh
+http://localhost:3000/api
+```
+
+## 📡 Endpoints Principales
+
+### 🔹 **Autenticación**
+
+- `POST /auth/login` → Iniciar sesión y obtener un token JWT
+
+### 🔹 **Usuarios** (Solo para Admins)
+
+- `GET /users` → Listar usuarios
+- `POST /users` → Crear usuario
+- `DELETE /users/:id` → Eliminar usuario
+
+### 🔹 **Productos** (Todos los usuarios pueden ver)
+
+- `GET /products` → Listar productos con paginación
+- `POST /products` → Crear un producto (Solo admin)
+- `PATCH /products/:id` → Editar un producto (Solo admin)
+- `DELETE /products/:id` → Eliminar un producto (Solo admin, si no está en una orden)
+
+## ✅ ¡Todo Listo!
+
+Ahora puedes consumir la API y probarla con Postman o Swagger.
+
+---
+
+📌 **Autor:** Fabio Sánchez  
+📌 **Repositorio:** [GitHub - tienda-virtual-backend](https://github.com/tu-usuario/tienda-virtual-backend)  
+🚀 **¡Feliz Coding!** 🎉
