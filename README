@@ -105,6 +105,52 @@ Ahora puedes consumir la API y probarla con Postman o Swagger.
 
 ---
 
+# 🛍️ Tienda Virtual - Frontend (Angular 19)
+
+Este proyecto es el **frontend** de la tienda virtual, desarrollado en **Angular 19**, siguiendo buenas prácticas de desarrollo y arquitectura basada en smart y dump components.
+
+---
+
+## 🚀 Requisitos Previos
+
+Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
+
+- **Node.js** (v18 o superior)  
+  👉 [Descargar Node.js](https://nodejs.org/)  
+- **Angular CLI** (v19 o superior)  
+  ```sh
+  npm install -g @angular/cli
+  
+### 1️⃣ Clonar el Repositorio
+```sh
+git clone https://github.com/tu-usuario/tienda-virtual-backend.git
+cd tienda-virtual-backend
+```
+### 2️⃣ Instalar Dependencias
+
+```sh
+npm install
+```
+
+### 3️⃣ Configurar Variables de Entorno
+
+correr el proyecto con ng serve 
+
+
+
+🚀 Tecnologías Utilizadas
+Angular 19 - Framework de frontend
+Angular Material - Librería UI
+RxJS - Programación reactiva
+TypeScript - Lenguaje principal
+SCSS - Preprocesador de estilos
+ESLint + Prettier - Reglas de código limpio
+
+
 📌 **Autor:** Fabio Sánchez  
 📌 **Repositorio:** [GitHub - tienda-virtual-backend](https://github.com/tu-usuario/tienda-virtual-backend)  
 🚀 **¡Feliz Coding!** 🎉
+
+
+
+
