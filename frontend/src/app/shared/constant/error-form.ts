@@ -30,4 +30,20 @@ export const ERROR_FORMS = {
     },
     image: {},
   },
+
+  user:{
+      name:{
+        required: 'El nombre es requerido',
+      },
+      email: {
+        required: 'El nombre es requerido',
+      },
+      passwor:{
+        required: 'El nombre es requerido',
+      },
+      rol:{
+        required: 'El nombre es requerido',
+      }
+  }
+
 };

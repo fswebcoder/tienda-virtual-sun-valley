@@ -9,7 +9,7 @@ import { EditProductDto } from '../models/editar-producto.dto';
   providedIn: 'root'
 })
 export class ProductService {
- private apiUrl = 'http://localhost:3000';
+ private apiUrl = 'http://localhost:3500';
   private http = inject(HttpClient);
   private router = inject(Router);
  

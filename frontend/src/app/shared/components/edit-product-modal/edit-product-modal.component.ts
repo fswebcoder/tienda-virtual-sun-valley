@@ -39,25 +39,19 @@ export class EditProductModalComponent {
   }
 
   initForm(): void {
-  
-    if(this.data == null){
-      this.form = this.editProductForm.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
-        price: [0, [Validators.required, Validators.min(1)]],
-        stock: [0, [Validators.required, Validators.min(1)]],
-        imageBase64: ['',  [Validators.required,]],
-      });
-    }
-    this.form = this.editProductForm.group({
+    const formControls = {
       name: [this.data?.name || '', Validators.required],
       description: [this.data?.description || '', Validators.required],
       price: [this.data?.price || 0, [Validators.required, Validators.min(1)]],
       stock: [this.data?.stock || 0, [Validators.required, Validators.min(1)]],
-      imageBase64: [this.data?.image
-        ? this.data.imageBase64 || ''
-        : ''],
-    });
+      imageBase64: [this.data?.imageBase64 || '', Validators.required],
+    };
+
+    if (this.data == null) {
+      formControls.imageBase64 = ['', Validators.required];
+    }
+
+    this.form = this.editProductForm.group(formControls);
   }
 
   generateParamsDto() {
@@ -93,7 +87,7 @@ export class EditProductModalComponent {
     }
   }
 
-  cerrarModal(): void {
+  closeModal(): void {
     this.dialogRef.close();
   }
 }

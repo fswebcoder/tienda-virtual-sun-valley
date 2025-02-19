@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { ProductsDumpComponent } from '../../dump/products-dump/products-dump.component';
 import { ProductService } from '../../../services/product.service';
 import { IProduct } from '../../../../shared/models/response-products.model';
@@ -8,6 +8,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-products-smart',
@@ -16,12 +17,12 @@ import {
   styleUrl: './products-smart.component.scss',
   providers: [ProductService],
 })
-export class ProductsSmartComponent {
+export class ProductsSmartComponent implements OnDestroy {
   products: IProduct[] = [];
   total: number = 0;
   totalPages: number = 0;
   private _snackBar = inject(MatSnackBar);
-
+  private destroy$ = new Subject<void>();
   durationInSeconds = 5;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -29,9 +30,11 @@ export class ProductsSmartComponent {
 
   constructor(private productService: ProductService) {}
 
+
   getAllProducts(event: any): void {
     this.productService
       .getAllProducts(event.page, event.limit)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.products = data.products;
         this.total = data.total;
@@ -69,5 +72,10 @@ export class ProductsSmartComponent {
         this.openSnackBar('Error al eliminar el producto');
       },
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

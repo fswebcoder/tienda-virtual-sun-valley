@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "58ce17e3-6b3a-4e86-a1a7-05c3577ccf90",
+		"name": "api-tienda-virtual",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12325912"
+	},
+	"item": [
+		{
+			"name": "create-user",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYWFhZTg4YS0zMjIzLTQyYjMtODQ5MS1kMjQ2YzY1YzBiYmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk4NDY1MjksImV4cCI6MTczOTg1MDEyOX0.RsAEyZXuJeg8I38PJUVNCZJQhTDVmvya16Zyr67g9Ns",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"jaimito el cartero\",\r\n  \"email\": \"jaimito@cartero.com\",\r\n  \"password\": \"password123\",\r\n  \"rol\": \"USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"fabio@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detele-user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYWFhZTg4YS0zMjIzLTQyYjMtODQ5MS1kMjQ2YzY1YzBiYmIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczOTg0NzQwNSwiZXhwIjoxNzM5ODUxMDA1fQ.ilQzi5Ha_QzfAMV0z7GcEiNn4JMhwcx_MAoI9mtiRwM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/85142f0b-76ba-473a-ab10-1b83596d8147",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"85142f0b-76ba-473a-ab10-1b83596d8147"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAlluser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NTBlODQwMC1lMjliLTQxZDQtYTcxNi00NDY2NTU0NDAwMDAiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczOTg0NTI0OCwiZXhwIjoxNzM5ODQ4ODQ4fQ.Vxlri0Frd12W54u1QeOAUKarlR1uaF06I8LmfmbuGC8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/all?page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MGUxOTQ3Mi01YWRkLTQ1ZGEtYjcwZi02MTYzNjIzNTM3MzQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk4NTEwNDMsImV4cCI6MTczOTg1NDY0M30.-_WofJqb1SEuNDTvlrPohBtwhbPeO1qKCDqa7RKfkdM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/products/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MGUxOTQ3Mi01YWRkLTQ1ZGEtYjcwZi02MTYzNjIzNTM3MzQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk4NTEwNDMsImV4cCI6MTczOTg1NDY0M30.-_WofJqb1SEuNDTvlrPohBtwhbPeO1qKCDqa7RKfkdM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Camiseta\",\r\n  \"description\": \"Camiseta de algodón\",\r\n  \"price\": 10,\r\n  \"quantity\": 5,\r\n  \"imageBase64\": \"https://example.com/image.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-product",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MGUxOTQ3Mi01YWRkLTQ1ZGEtYjcwZi02MTYzNjIzNTM3MzQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk4NTEwNDMsImV4cCI6MTczOTg1NDY0M30.-_WofJqb1SEuNDTvlrPohBtwhbPeO1qKCDqa7RKfkdM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Laptop Gamer\",\r\n  \"price\": 1500.00,\r\n  \"stock\": 10,\r\n  \"imageBase64\": \"base64StringNuevo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/9ef021f8-41f1-4ab7-8175-0ff276c5251e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"9ef021f8-41f1-4ab7-8175-0ff276c5251e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-product",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

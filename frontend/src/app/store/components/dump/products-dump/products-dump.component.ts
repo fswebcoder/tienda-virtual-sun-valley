@@ -18,7 +18,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  quantity: number;
+  stock: number;
   imageBase64: string;
 }
 
@@ -81,7 +81,7 @@ export class ProductsDumpComponent implements OnInit {
 
   ngOnInit() {
     this.getRole()
-    this.getAllProducts(1, 4);
+    this.getAllProducts(1, 10);
 
   }
 

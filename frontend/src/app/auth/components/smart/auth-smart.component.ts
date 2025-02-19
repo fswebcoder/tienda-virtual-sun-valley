@@ -33,19 +33,21 @@ export class AuthSmartComponent implements AfterContentInit {
   login(loginDto: LoginDto): void {
     this.authService.login(loginDto).subscribe({
       next: (respose) => {
-        this.openSnackBar();
-        if(respose.access_token){
+        console.log('respose', respose);
+        if(respose.access_token !== null){
+          this.openSnackBar('¡Sesión iniciada!');
+
           this._router.navigate(['/store/products']);
         }
       },
       error: (error) => {
-        console.error('Login error', error);
+        this.openSnackBar('Error al iniciar sesión');
       } 
     })
   }
 
-    openSnackBar() {
-        this._snackBar.open('¡Sesión iniciada!', 'Close', {
+    openSnackBar(mensaje: string): void {
+        this._snackBar.open(mensaje, 'Close', {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         duration: this.durationInSeconds * 1000,

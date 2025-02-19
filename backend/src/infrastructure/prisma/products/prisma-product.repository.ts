@@ -64,9 +64,7 @@ export class PrismaProductRepository implements IProductRepository {
       this.prisma.product.findMany({
         skip,
         take: limit,
-        orderBy: {
-          name: 'desc' // Order by creation date in descending order
-        },
+
         select: {
           id: true,
           name: true,

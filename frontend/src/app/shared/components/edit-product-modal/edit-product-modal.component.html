@@ -1,10 +1,10 @@
 <div class="modal-body">
-    <h2>{{this.data == null ? 'Crear producto': 'Editar producto'}}</h2>
-    <p>Por favor, {{this.data === null ? 'llene': 'actualice'}} la información del producto a guardar</p>
+    <h2>{{this.data == null ? 'Crete product': 'Edit product'}}</h2>
+    <p>Please, {{this.data === null ? 'fill': 'update'}} in the information for the product to be saved</p>
     <form [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
         <div>
             <mat-form-field appearance="fill" fxFlex>
-                <mat-label>Nombre del Producto</mat-label>
+                <mat-label>Product name</mat-label>
                 <input matInput type="text" formControlName="name">
               
             </mat-form-field>
@@ -15,7 +15,7 @@
 
       <div>
         <mat-form-field appearance="fill" fxFlex>
-            <mat-label>Descripción</mat-label>
+            <mat-label>Description</mat-label>
             <textarea matInput formControlName="description" rows="3"></textarea>
         </mat-form-field>
         <div class="text-danger" formValidator [touched]="form.get('description')?.touched" [inputErrors]="form.get('description')?.errors" [errorDefs]="(erroresDefs?.editProduct)!.description"></div>
@@ -25,7 +25,7 @@
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
             <div fxFlex="100" fxFlex.lt-md="50">
                 <mat-form-field appearance="fill" fxFlex>
-                    <mat-label>Precio</mat-label>
+                    <mat-label>Price</mat-label>
                     <input matInput type="number" formControlName="price">
                 </mat-form-field>
                 <div class="text-danger" formValidator [touched]="form.get('price')?.touched" [inputErrors]="form.get('price')?.errors" [errorDefs]="(erroresDefs?.editProduct)!.price"></div>
@@ -46,8 +46,8 @@
         </div>
 
         <div class="modal-footer" fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-button type="button" data-dismiss="modal" (click)="cerrarModal()">Cerrar</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="editProduct()"   >Guardar Cambios</button>
+            <button mat-button type="button" data-dismiss="modal" (click)="closeModal()">Close</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="editProduct()"   >Save</button>
         </div>
     </form>
 </div>

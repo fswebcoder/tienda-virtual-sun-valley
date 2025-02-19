@@ -1,0 +1,100 @@
+<div class="modal-body">
+  <h2>{{ this.data == null ? "Crear usuario" : "Editar usuario" }}</h2>
+  <p>
+    Por favor, {{ this.data === null ? "llene" : "actualice" }} la información
+    del usuario a guardar
+  </p>
+  <form [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
+    @if(this.data != null){
+    <div>
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>id</mat-label>
+        <input matInput type="text" formControlName="id" />
+      </mat-form-field>
+    </div>
+    }
+
+    <div>
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+      <div
+        class="text-danger"
+        formValidator
+        [touched]="form.get('name')?.touched"
+        [inputErrors]="form.get('name')?.errors"
+        [errorDefs]="(erroresDefs?.user)!.name"
+      ></div>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+      <div fxFlex="100" fxFlex.lt-md="50">
+        <mat-form-field appearance="fill" fxFlex>
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="email" />
+        </mat-form-field>
+        <div
+          class="text-danger"
+          formValidator
+          [touched]="form.get('email')?.touched"
+          [inputErrors]="form.get('email')?.errors"
+          [errorDefs]="(erroresDefs?.user)!.email"
+        ></div>
+      </div>
+      <div fxFlex="100" fxFlex.lt-md="50">
+        <mat-form-field appearance="fill" fxFlex>
+          <mat-label>Password</mat-label>
+          <input matInput type="text" formControlName="passwor" />
+        </mat-form-field>
+        <div
+          class="text-danger"
+          formValidator
+          [touched]="form.get('passwor')?.touched"
+          [inputErrors]="form.get('passwor')?.errors"
+          [errorDefs]="(erroresDefs?.user)!.passwor"
+        ></div>
+      </div>
+      <div fxFlex="100" fxFlex.lt-md="50">
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" name="food">
+            <mat-option value="ADMIN">ADMIN</mat-option>
+            <mat-option value="USER">USER</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div
+          class="text-danger"
+          formValidator
+          [touched]="form.get('stock')?.touched"
+          [inputErrors]="form.get('stock')?.errors"
+          [errorDefs]="(erroresDefs?.editProduct)!.stock"
+        ></div>
+      </div>
+    </div>
+
+    <div
+      class="modal-footer"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <button
+        mat-button
+        type="button"
+        data-dismiss="modal"
+        (click)="closeModal()"
+      >
+        Cerrar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="saveUser()"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

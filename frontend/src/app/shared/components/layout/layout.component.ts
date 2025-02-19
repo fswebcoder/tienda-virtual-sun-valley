@@ -45,12 +45,12 @@ export class LayoutComponent {
       isAdmin: this.getRolUser() === 'ADMIN' ? true : false,
       link: 'products',
     },
-    {
-      title: 'Orders',
-      icon: 'shopping_cart',
-      isAdmin: this.getRolUser() === 'ADMIN' ? true : false,
-      link: 'orders',
-    },
+    // {
+    //   title: 'Orders',
+    //   icon: 'shopping_cart',
+    //   isAdmin: this.getRolUser() === 'ADMIN' ? true : false,
+    //   link: 'orders',
+    // },
   ];
 
   constructor() {

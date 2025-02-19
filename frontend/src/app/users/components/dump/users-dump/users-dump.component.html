@@ -1,0 +1,63 @@
+<div class="create-product-container">
+  <button mat-raised-button color="accent " (click)="createEdiUser()">
+    <mat-icon>add</mat-icon>Create user
+  </button>
+</div>
+<div class="table-container">
+  <mat-card class="mat-elevation-z8">
+    <table mat-table [dataSource]="users">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="passwor">
+        <th mat-header-cell *matHeaderCellDef>Password</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.passwor ? user.passwor : "No Asignado" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let user">{{ user.rol }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let user" class="actions-users">
+          <button mat-mini-fab color="warn" (click)="deleteProuct(user.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <!-- <button mat-mini-fab color="warn" (click)="createEdiUser(user)">
+            <mat-icon>edit</mat-icon>
+          </button> -->
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data</td>
+      </tr>
+    </table>
+  </mat-card>
+</div>
+<mat-paginator
+  class="pagination-users"
+  [length]="total"
+  [pageSize]="4"
+  [pageSizeOptions]="[5, 10, 15]"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>

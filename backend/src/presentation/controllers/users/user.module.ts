@@ -6,6 +6,7 @@ import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { PrismaUserRepository } from 'src/infrastructure/prisma/users/prisma-user.repository';
 import { DeleteUserUseCase } from 'src/core/domain/usecases/user/delete-user.use-case';
 import { FindAllUsersUseCase } from 'src/core/domain/usecases/user/find-users.use-case';
+import { UpdateUserUseCase } from 'src/core/domain/usecases/user/update-user.use-case';
 
 @Module({
   controllers: [UserController],
@@ -15,8 +16,10 @@ import { FindAllUsersUseCase } from 'src/core/domain/usecases/user/find-users.us
     { provide: 'IUserRepository', useClass: PrismaUserRepository },
     CreateUserUseCase, 
     DeleteUserUseCase,
-    FindAllUsersUseCase
+    FindAllUsersUseCase,
+    UpdateUserUseCase
   ],
-  exports: [CreateUserUseCase, DeleteUserUseCase, FindAllUsersUseCase], 
+  exports: [CreateUserUseCase, DeleteUserUseCase, FindAllUsersUseCase, UpdateUserUseCase], 
 })
 export class UserModule {}
+ 

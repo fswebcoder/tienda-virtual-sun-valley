@@ -3,10 +3,12 @@ import { PrismaService } from '../prisma.service';
 import { IUserRepository } from '../../../core/domain/interfaces/user.repository';
 import { User } from '../../../core/domain/entities/user.entity';
 import { ERol } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class PrismaUserRepository implements IUserRepository {
   constructor(private readonly prisma: PrismaService) {}
+ 
  
   async createUser(user: User): Promise<User> {
     try {
@@ -65,6 +67,26 @@ export class PrismaUserRepository implements IUserRepository {
   
     return { users, total };
   }
-  
 
+  async update(id: string, userData: Partial<User>): Promise<User> {
+    const existingUser = await this.findById(id);
+    if (!existingUser) throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
+
+    if (userData.password !== undefined && userData.password !== null) {
+      userData = { ...userData, password: await bcrypt.hash(userData.password, 10) };
+    } else {
+      const { password, ...rest } = userData;
+      userData = rest;
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id },
+      data: {
+        ...userData,
+        password: userData.password ?? undefined,
+      },
+    });
+
+    return new User(updatedUser.id, updatedUser.name, updatedUser.email, updatedUser.password, updatedUser.rol);
+  }
 }

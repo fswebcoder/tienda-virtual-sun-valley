@@ -22,13 +22,13 @@ export const routes: Routes = [
                     return m.ProductsSmartComponent;
                 }
             },
-            // {
-            //     path: 'users',
-            //     async loadComponent() {
-            //         const m = await import('./store/components/smart/users-smart/users-smart.component');
-            //         return m.UsersSmartComponent;
-            //     }
-            // }
+            {
+                path: 'users',
+                async loadComponent() {
+                    const m = await import('./users/pages/home-user/home-user.component');
+                    return m.HomeUserComponent;
+                }
+            }
         ]
     }
 ];

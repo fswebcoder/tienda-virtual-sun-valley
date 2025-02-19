@@ -1,0 +1,9 @@
+<app-users-dump
+
+[users]="dataUsers"
+[total]="total"
+[totalPages]="totalPages"
+(emitSearch)="getAllUsers($event)"
+(emitDeleteUser)="deleteUser($event)"
+(emitSaveuser)="saveUser($event)"
+/>
